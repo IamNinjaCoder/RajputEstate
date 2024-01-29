@@ -1,6 +1,7 @@
+// This is a React component for the header section of a website.
+// It includes a logo, search bar, and navigation links
 import {FaSearch} from 'react-icons/fa';
 import {Link} from 'react-router-dom';
-
 
 import React from 'react'
 
@@ -26,13 +27,13 @@ export default function header() {
 
             <ul className='flex gap-4'>
                 <Link to='/'>
-                    <li className="hidden sm:inline text-slate-700 hover:underline">
+                    <li className="hidden sm:inline text-blue-700 hover:underline">
                         Home
                     </li>
                 </Link>
 
                 <Link to='/About.jsx'>
-                    <li className='hidden sm:inline text-blue-500 hover:underline'>
+                    <li className='hidden sm:inline text-blue-700 hover:underline'>
                         About
                     </li>
                 </Link>

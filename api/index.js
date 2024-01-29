@@ -1,7 +1,17 @@
-import express from 'express';
+
+// This code is written in JavaScript and is stored in a file named index.js.
+// It imports the required modules and sets up a server using Express.js.
+// It also establishes a connection to a MongoDB database using Mongoose.
+// Additionally, it imports a user router from another file and uses it for routing.
+// The code also loads environment variables from a .env file using dotenv.
+
+
+import express, { response } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './routes/user.route.js'
+import authRouter from './routes/auth.route.js';
+
 dotenv.config();
 
 
@@ -21,11 +31,13 @@ mongoose.connect(process.env.MONGO).then(()=>{
 
 //create a new express app
 const app = express();
-
+app.use(express.json());
 //start the app
 app.listen(3004,()=>{
-    console.log("Servefdr is sdfsrunning");
+    console.log("Server is running");
 });
 
 //add the user router
 app.use("/api/user",userRouter);
+
+app.use('/api/auth',authRouter);

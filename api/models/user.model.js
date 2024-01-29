@@ -1,4 +1,4 @@
-import mongoose from mongoose;
+import mongoose from "mongoose";
 
 // In this section we are creating some rules that user need to follow while creating data Like creating username...
 //rules are called as Schema 
