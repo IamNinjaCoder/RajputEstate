@@ -11,7 +11,7 @@ export default function header() {
         <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
             <Link to='/'>
             <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
-                <span className='text-orange-500'>Rajput</span>
+                <span className='text-orange-600'>Rajput</span>
                 <span className='text-slate-900'>Estate</span>
             </h1>
             </Link>
@@ -37,7 +37,7 @@ export default function header() {
                         About
                     </li>
                 </Link>
-                <Link to='/SignIn.jsx'>
+                <Link to='/SignUp.jsx'>
                     <li className='sm:inline text-red-500 hover:underline'>
                         SignIn
                     </li>

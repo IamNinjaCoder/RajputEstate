@@ -6,7 +6,7 @@
 // The code also loads environment variables from a .env file using dotenv.
 
 
-import express, { response } from 'express';
+import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './routes/user.route.js'
