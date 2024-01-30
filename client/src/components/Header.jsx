@@ -37,7 +37,7 @@ export default function header() {
                         About
                     </li>
                 </Link>
-                <Link to='/SignUp.jsx'>
+                <Link to='/SignIn.jsx'>
                     <li className='sm:inline text-red-500 hover:underline'>
                         SignIn
                     </li>
