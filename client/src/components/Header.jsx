@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import React from 'react'
 
 export default function header() {
+    console.log("Working")
   return (
     <header className='bg-slate-200 shadow-md '>
         <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
@@ -38,7 +39,7 @@ export default function header() {
                     </li>
                 </Link>
                 <Link to='/SignIn.jsx'>
-                    <li className='sm:inline text-red-500 hover:underline'>
+                    <li className='p-1 rounded-lg sm:inline text-red-500 '>
                         SignIn
                     </li>
                 </Link>
