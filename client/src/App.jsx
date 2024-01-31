@@ -10,7 +10,6 @@ import PrivateRoute from './components/privateRoute';
 
 
 export default function App() {
-  console.log("working");
   return (
     <BrowserRouter>
        <Header/>
@@ -19,8 +18,9 @@ export default function App() {
           <Route path="/About.jsx" element={<About/>}/>
           <Route path='/SignIn.jsx' element={<SignIn/>}/>
           <Route path='/SignUp.jsx' element={<SignUp/>}/>
-          <Route element={<PrivateRoute/>}>
-            <Route path='/Profile.jsx' element={<Profile/>}/>
+          
+        <Route element={<PrivateRoute />}>
+          <Route path='/profile.jsx' element={<Profile />} />
           </Route>
 
 

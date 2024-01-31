@@ -40,10 +40,17 @@ export default function header() {
                         About
                     </li>
                 </Link>
-                <Link to='/SignIn.jsx'>
-                    {currentUser ? (<img  className='rounded-full h-7 w-7 object-cover' src={currentUser.avatar} alt='profile' />) 
-                    : ((<li className='p-1 rounded-lg sm:inline text-red-500 '></li>))}
-                </Link>
+                <Link to='/Profile.jsx'>
+            {currentUser ? (
+              <img
+                className='rounded-full h-7 w-7 object-cover'
+                src={currentUser.avatar}
+                alt='profile'
+              />
+            ) : (
+              <li className=' text-slate-700 hover:underline'> Sign in</li>
+            )}
+          </Link>
                 
             </ul>
 
