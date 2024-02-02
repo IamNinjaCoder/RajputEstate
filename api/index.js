@@ -11,6 +11,8 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './routes/user.route.js'
 import authRouter from './routes/auth.route.js';
+import cookieParser from 'cookie-parser';
+
 
 dotenv.config();
 
@@ -32,6 +34,7 @@ mongoose.connect(process.env.MONGO).then(()=>{
 //create a new express app
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 //start the app
 app.listen(3004,()=>{
     console.log("Server is running");
@@ -41,6 +44,7 @@ app.listen(3004,()=>{
 app.use("/api/user",userRouter);
 
 app.use('/api/auth',authRouter);
+
 
 //Creating a middleware and a functioin to handle possible errors
 app.use((err,req,res,next)=>{
