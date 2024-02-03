@@ -9,7 +9,7 @@ import {
 
 import { updateUserStart,updateUserSuccess,updateUserFailure , deleteUserFailure,deleteUserStart,deleteUserSuccess,signOutUserStart} from '../redux/user/userSlice';
 import { app } from '../firebase';
-
+import {Link} from 'react-router-dom';
 
 
 
@@ -179,6 +179,9 @@ export default function Profile() {
         <button disabled={loading} className='bg-blue-500 text-white rounded-lg p-3 hover:opacity-90 uppercase'>
           {loading?'Loading...':'Update'}
         </button>
+        <Link to={'/create-listing'} className='bg-green-700 text-white p-3 rounded-lg text-center uppercase hover:opacity-95'>
+          create Listing
+        </Link>
       </form>
 
       <div className='flex justify-between mt-5'>
