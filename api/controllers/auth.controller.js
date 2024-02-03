@@ -1,12 +1,3 @@
-// This is a JavaScript file named auth.controller.js.
-
-// /**
-//  * Creates a new user with the provided username, email, and password.
-//  * Hashes the password using bcryptjs and saves the user to the database.
-//  * Returns a success message if the user is created successfully.
-//  * Otherwise, passes the error to the error handler middleware.
-//  */
-
 import User from '../models/user.model.js';
 import bcryptjs from 'bcryptjs';
 import { errorHandler } from '../utils/error.js';
@@ -78,3 +69,11 @@ export const google = async (req, res, next) => {
   }
 };
 
+export const signOut = async (req, res, next) => {
+  try {
+    res.clearCookie('access_token');
+    res.status(200).json('User has been logged out!');
+  } catch (error) {
+    next(error);
+  }
+};
