@@ -22,6 +22,7 @@ export default function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [showListingsError, setShowListingsError] = useState(false);
+  const [showListings, setShowListings] = useState(false);
   const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
 
@@ -86,24 +87,33 @@ export default function Profile() {
     }
   };
 
-  const handleUserDelete = async ()=>{
-    try{
-      dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser.id}`,{
-        method:'DELETE',
-      });
-      const data = await res.json();
-      if (data.success===false){
-        dispatch(deleteUserFailure(data.message));
+  const handleUserDelete = async () => {
+    try {
+      // Display a confirmation dialog
+      const isConfirmed = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
+  
+      // If the user confirms, proceed with the deletion
+      if (isConfirmed) {
+        dispatch(deleteUserStart());
+  
+        const res = await fetch(`/api/user/delete/${currentUser.id}`, {
+          method: 'DELETE',
+        });
+  
+        const data = await res.json();
+  
+        if (data.success === false) {
+          dispatch(deleteUserFailure(data.message));
+        }
+  
+        dispatch(deleteUserSuccess(data));
       }
-      dispatch(deleteUserSuccess(data));
-
-    }
-
-    catch(error){
+  
+    } catch (error) {
       dispatch(deleteUserFailure(error.message));
     }
   };
+  
 
 
   const handleSignOut = async () => {
@@ -136,6 +146,33 @@ export default function Profile() {
       setShowListingsError(true);
     }
   };
+
+
+
+  const handleListingDelete = async (listingId) => {
+
+    try {
+      const isConfirmed = window.confirm("Are you sure you want to delete your listing? This action cannot be undone.");
+      if (isConfirmed){
+        const res = await fetch(`/api/listing/delete/${listingId}`, {
+          method: 'DELETE',
+        });
+        const data = await res.json();
+        if (data.success === false) {
+          console.log(data.message);
+          return;
+        }
+  
+        setUserListings((prev) =>
+          prev.filter((listing) => listing._id !== listingId)
+        );
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
@@ -205,10 +242,15 @@ export default function Profile() {
       </div>
       <p className='text-red-700 mt-3'>{error?error:''}</p>
       <p className='text-green-500 mt-3'>{updateSuccess?'Updated Successfully':''}</p>
-   
+            
+    
       <button onClick={handleShowListings} className='text-green-700 w-full'>
         Show Listings
       </button>
+     
+      
+   
+            
       <p className='text-red-700 mt-5'>
         {showListingsError ? 'Error showing listings' : ''}
       </p>
