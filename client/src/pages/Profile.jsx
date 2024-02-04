@@ -22,7 +22,6 @@ export default function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [showListingsError, setShowListingsError] = useState(false);
-  const [showListings, setShowListings] = useState(false);
   const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
 
