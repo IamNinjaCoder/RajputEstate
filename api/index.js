@@ -1,62 +1,51 @@
-
-// This code is written in JavaScript and is stored in a file named index.js.
-// It imports the required modules and sets up a server using Express.js.
-// It also establishes a connection to a MongoDB database using Mongoose.
-// Additionally, it imports a user router from another file and uses it for routing.
-// The code also loads environment variables from a .env file using dotenv.
-
-
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import userRouter from './routes/user.route.js'
+import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 import listingRouter from './routes/listing.route.js';
 import cookieParser from 'cookie-parser';
-
-
+import path from 'path';
 dotenv.config();
 
+mongoose
+  .connect(process.env.MONGO)
+  .then(() => {
+    console.log('Connected to MongoDB!');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
+  const __dirname = path.resolve();
 
-
-
-//connect to mongo db
-
-//create a new express app
-
-//connect to mongo db
-mongoose.connect(process.env.MONGO).then(()=>{
-    console.log("Connected to MongoDb!");
-}).catch((err)=>{
-    console.log("Not Connected!!")
-});
-
-//create a new express app
 const app = express();
+
 app.use(express.json());
+
 app.use(cookieParser());
-//start the app
-app.listen(3004,()=>{
-    console.log("Server is running");
+
+app.listen(3004, () => {
+  console.log('Server is running on port 3004!');
 });
 
-//add the user router
-app.use("/api/user",userRouter);
-
-app.use('/api/auth',authRouter);
-app.use('/api/listing',listingRouter);
+app.use('/api/user', userRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/listing', listingRouter);
 
 
-//Creating a middleware and a functioin to handle possible errors
-app.use((err,req,res,next)=>{
-    const statusCode = err.statusCode || 500;
-    const message = err.message || "Internal Sever Error :(";
-    return res.status(statusCode).json({
-        success:false,
-        statusCode,
-        message,
-    });
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+})
+
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
+  return res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
 });
-
-
